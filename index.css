@@ -40,8 +40,9 @@ body {
     font-size: 80px;
     display: flex;
     align-items: center;
-    justify-self: center;
+    justify-content: center;
 }
+
 
 button {
     color: #fff;
