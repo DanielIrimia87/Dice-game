@@ -18,14 +18,24 @@ const resetBtn = document.getElementById("resetBtn");
 /* end store references */
 
 /* Hook up a click event listener to the Roll Dice Button. */
-rollBtn.addEventListener("click", function() {
+rollBtn.addEventListener("click", () => {
     const randomeNumber = Math.floor(Math.random() * 6) + 1;
-    log(randomeNumber);
 
-    // 1. Find out which players turn it is
+    // Display the dice number 
     if ( player1Turn) {
-           
+        messageEl.textContent = "Player 1 Turn"
+        player1Dice.textContent = randomeNumber;    
+        player1Dice.classList.add("active");  // add classactive
+        player2Dice.classList.remove("active"); // remove the active classList 
+    } else  { 
+        messageEl.textContent = "Player 2 Turn"
+        player2Dice.textContent = randomeNumber;
+        player2Dice.classList.add("active");  // add classactive
+        player1Dice.classList.remove("active"); // remove the active classList
+        
     }
-     // 2. log out the value e.g. "Player 1 rolled 5"
-     // 3. Switch the turn back to the other player
+    // Switch the turn back to the other player
+    player1Turn = !player1Turn;
+    
 })
+/* end click event Roll Dice Button*/
