@@ -8,30 +8,36 @@
     <title>Dice game</title>
 </head>
 <body>
-    <div class="container">
+    
+    <main title="Dice game" class="container">
 
-        <h1 id="message">Player 1 Turn</h1>
+        <header>
+            <h1 id="message"></h1>
+        </header>
 
         <div class="players">
 
             <div id="player1">
-
-                <h2>Score: 
+                
+                <h2> Player 1</h2>
+                
+                <h3>Score: 
                     <span id="player1Scoreboard">0</span>
-                </h2>
+                </h3>
 
                 <div id="player1Dice" class="dice active">
                     <img src="/images/default-dice.png" alt=" Dice images" id="player1DiceImage" />
                 </div>
                 
-
             </div>
 
             <div id="player2">
 
-                <h2>Score: 
+                <h2> Player 2 </h2>
+
+                <h3>Score: 
                     <span id="player2Scoreboard">0</span>
-                </h2>
+                </h3>
 
                 <div id="player2Dice" class="dice">
                     <img src="/images/default-dice.png" alt=" Dice images" id="player2DiceImage" />
@@ -44,7 +50,7 @@
         <button id="rollBtn">Roll Dice 🎲</button>
         <button id="resetBtn">Reset Game 🔁</button>
 
-    </div>
+    </main>
     
     <script src="index.js"></script>
 </body>
