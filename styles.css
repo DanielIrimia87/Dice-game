@@ -1,0 +1,152 @@
+/* Path: styles.css */
+
+/* ****************** */
+/* General styles     */
+/* ****************** */
+
+html,
+body {
+  --color-1: #a8e6cf;
+  --color-2: #dcedc1;
+  --color-3: #ffd3b6;
+  --color-4: #ffaaa5;
+  --color-5: #ff8b94;
+}
+
+body {
+  padding-top: 50px;
+  background-image: linear-gradient(135deg, var(--color-1), var(--color-2));
+  height: 100vh;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header */
+.header {
+  color: var(--color-2);
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin: -20px 0 20px 0;
+  padding: 10px;
+}
+
+/* Container */
+.container {
+  width: 650px;
+  text-align: center;
+  margin: 0 auto;
+  background: linear-gradient(
+    180deg,
+    var(--color-5) 10%,
+    var(--color-3) 50%,
+    var(--color-1) 90%
+  );
+  box-shadow: -2px 6px 18px 3px rgba(0, 0, 0, 0.75);
+  padding: 50px;
+  border-radius: 10px;
+}
+
+/*  *********************** */
+/*  Players */
+/*  *********************** */
+.players {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.players #player1,
+.players #player2 {
+  max-height: fit-content;
+  padding: 20px 30px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.player-name {
+  font-size: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.player-score {
+  display: block;
+  text-align: center;
+  font-size: 80px;
+  font-weight: 100;
+  color: #eb4d4d;
+  margin: 25px auto;
+}
+
+.active{
+  border: 1px solid rgba(59,58,58,0.45);
+  border-radius: 25px;
+  box-shadow: -10px 4px 10px gray;
+  
+}
+
+/* Dices */
+.dice {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dice Images */
+img {
+  max-width: 100px;
+  height: auto;
+  margin: 6px;
+}
+
+#dice1,#dice2 {
+  display: none;
+}
+
+/* Buttons */
+button {
+  color: #fff;
+  padding: 20px 30px;
+  font-size: 20px;
+  margin: 40px auto;
+  border: none;
+  border-radius: 5px;
+  top: 0px;
+  transition: top ease 0.5s;
+  cursor: pointer;
+}
+
+button:hover {
+  font-weight: 600;
+  position: relative;
+  top: -10px;
+}
+
+
+#rollBtn {
+  background-color: var(--color-5);
+}
+
+#resetBtn {
+  background-color: var(--color-4);
+}
+
+button:focus {
+  outline: none;
+}
+
+#resetBtn {
+  display: none;
+}
