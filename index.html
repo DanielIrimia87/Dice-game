@@ -1,58 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- This is the meta tag. It is used to specify the character encoding for the HTML document. -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Dice game</title>
-</head>
-<body>
-    
-    <main title="Dice game" class="container">
 
-        <header>
-            <h1 id="message"></h1>
+    <!-- This is a link to the google fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet"> 
+
+    <!-- This is the link to the styles.css -->   
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <!-- The title of the page. -->
+    <title>Dice Game</title>
+
+</head>
+
+<body>
+      
+    <!-- section with the class of container. -->
+    <section class="container">
+
+        <!-- Creating a header with the id of message and the title of Player Name. -->
+        <header class="header">
+            <h1 id="message" alt="Player Name wining the game" title="Player Name wining the game"></h1>
         </header>
 
-        <div class="players">
+        <!-- This is creating a main section with the class of players. -->
+        <main class="players">
 
-            <div id="player1">
+            <!-- This is creating a div with the class of player and the id of player1. -->
+            <div id="player1" class="active">
+
+                <h2 class="player-name" alt="Player 1"  title ="Player 1"> Player 1 </h2>
                 
-                <h2> Player 1</h2>
-                
-                <h3>Score: 
-                    <span id="player1Scoreboard">0</span>
+                <h3 alt="Player 2 score"> Score:
+                    <span id="player1Scoreboard" class="player-score" alt="Scoreboard Player 1" title="Scoreboard player 2">0</span>
                 </h3>
-
-                <div id="player1Dice" class="dice active">
-                    <img src="/images/default-dice.png" alt=" Dice images" id="player1DiceImage" />
-                </div>
-                
+    
             </div>
 
+            <!--Dice images -->
+            <div class="dice">
+                <img id="dice1" src="images/dice6.png" alt="Dice">
+                <img id="dice2" src="images/dice6.png" alt="Dice">
+            </div>
+            <!-- End Dice images -->
+
+            <!-- This is creating a div with the class of player and the id of player2. -->
             <div id="player2">
 
-                <h2> Player 2 </h2>
+                <h2 class="player-name" alt ="Player 2" title ="Player 2">Player 2 </h2>
 
-                <h3>Score: 
-                    <span id="player2Scoreboard">0</span>
+                <h3 alt="Player 2 score" > Score:
+                    <span id="player2Scoreboard" class="player-score" alt="Scoreboard Player 2" title="Scoreboard player 2">0</span>
                 </h3>
-
-                <div id="player2Dice" class="dice">
-                    <img src="/images/default-dice.png" alt=" Dice images" id="player2DiceImage" />
-                </div> 
 
             </div>
 
+        </main>
+        
+        <!-- button section -->
+        <div class="buttons">
+
+            <button id="rollBtn">Roll Dice 🎲</button>
+            <button id="resetBtn">Reset Game 🔁</button>
+            
         </div>
+        <!-- End button section -->
 
-        <button id="rollBtn">Roll Dice 🎲</button>
-        <button id="resetBtn">Reset Game 🔁</button>
+    </section>
 
-    </main>
-    
+    <!-- This is the script tag. It is used to include the javascript file. -->
     <script src="index.js"></script>
+
 </body>
-</html>
 </html>
