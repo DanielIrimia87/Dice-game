@@ -65,19 +65,19 @@ const log = args => console.log(args);
         
         /* The above code is checking to see if the player rolled a 1 or a 6. If they rolled a 1, they
         lose their turn. If they rolled a 6, they double their score. */
+        switchTurn();
         if (dice1Roll === 1 && dice2Roll === 1) { 
             messageEl.textContent = "You rolled 1! You lose your turn!";
             switchTurn();
         } else if (dice1Roll === 6 && dice2Roll === 6) {
             messageEl.textContent = `You rolled a ${dice1Roll} and a ${dice2Roll}. You double up your score!`;
             updateScore(dice1Roll,dice2Roll);
-            
+            updateScore(dice1Roll,dice2Roll);
         } else {
             messageEl.textContent = "You rolled " + (dice1Roll + dice2Roll) + "!";
         }
 
         updateScore(dice1Roll,dice2Roll);
-        switchTurn();
     });
 
     /**
@@ -90,11 +90,9 @@ const log = args => console.log(args);
 
         if (player1Turn) {
             player1Score += dice1Roll + dice2Roll;
-            console.log("Player 1: " + player1Score);
             player1Scoreboard.textContent = player1Score;
         } else {
             player2Score += dice1Roll + dice2Roll;
-            console.log("Player 2: " + player2Score);
             player2Scoreboard.textContent = player2Score;
         }
         checkWinner();
