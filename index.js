@@ -1,32 +1,43 @@
-/* log(arg) shorter syntax of  console.log */
-const log = arg => console.log(arg);
 
-const backgroundState = {
-    initialState: "linear-gradient(180deg, var(--color-5) 10%, var(--color-3) 50%, var(--color-1) 91%)",
-    winner: "/images/winner-dice.gif" 
-}
+/**
+ * It takes an argument, and logs it to the console
+ * @param args - The arguments passed to the function.
+ */ 
+/* /* const log(arg) shorter syntax of  console.log */
+const log = args => console.log(args);
 
-const {initialState, winner} = backgroundState;
+/* Defining the game state. */
+/* Game state */
+    
+    /* Stored  background State of the container */
+        const backgroundState = {
+            initialState: "linear-gradient(180deg, var(--color-5) 10%, var(--color-3) 50%, var(--color-1) 90%)",  
+            winerState: "/images/winner-dice.gif" 
+        };
+    /* Destructuring the backgroundState object. */
+        const {initialState, winerState} = backgroundState;
+    /* End Stored background State of the container */
 
-/* game state: */
     let player1Score = 0;
     let player2Score = 0;
     let player1Turn = true;
-/* end game state */
+    let pprevDiceRoll = 0;
+/* end game state*/
 
-/* store references to DOM nodes */
-    const player1Dice = document.getElementById("player1Dice");
-    const player2Dice = document.getElementById("player2Dice");
-    const player1DiceImage = document.getElementById("player1DiceImage");
-    const player2DiceImage = document.getElementById("player2DiceImage");
+/* Store references to the DOM notes */
+
+    const containerEL = document.querySelector('.container');
+    const messageEl = document.getElementById('message');
+    const player1 = document.getElementById('player1');
+    const player2 = document.getElementById('player2');
     const player1Scoreboard = document.getElementById("player1Scoreboard");
     const player2Scoreboard = document.getElementById("player2Scoreboard");
-    const messageEl = document.getElementById("message");
-    const rollBtn = document.getElementById("rollBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const containerEl = document.querySelector(".container");
-    
-/* end store references */
+    const dice1 = document.getElementById('dice1');
+    const dice2 = document.getElementById('dice2');
+    const rollDice = document.getElementById('rollBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+/* End references to the DOM notes */
 
 /* show display block button   */                     
     function showDisplayButton() {
@@ -35,69 +46,121 @@ const {initialState, winner} = backgroundState;
     }
 /* end show display block button */
 
-/* Hook up a click event listener to the Roll Dice Button. */
-    rollBtn.addEventListener("click", () => {
-        
-        // Generate numbers from 1 to 6
-        const randomNumber = Math.floor(Math.random() * 6) + 1;
-        // assets/dice1.png upto assets/dice6.png
-        const diceImage = "/images/dice" + randomNumber + ".png";
+/** Defining the game logic. */
+/* Game logic */
+    rollDice.addEventListener('click', () => {
 
-        // Update the scores for each player
-        // Display the scores in their scoreboards
-        if ( player1Turn) {
-            player1Score += randomNumber;
-            player1Scoreboard.textContent = player1Score; //    update the scoreboards
-            player1DiceImage.setAttribute("src",diceImage);
-            player1Dice.classList.remove("active");  // remove the active classList 
-            player2Dice.classList.add("active"); // add classactive
-            messageEl.textContent = "Player 2 Turn"
-        } else  { 
-            player2Score += randomNumber;
-            player2Scoreboard.textContent = player2Score; //    update the scoreboards
-            player2DiceImage.setAttribute("src",diceImage);
-            player2Dice.classList.remove("active"); // remove the active classList
-            player1Dice.classList.add("active"); // add classactive 
-            messageEl.textContent = "Player 1 Turn"
+        /* Generating 2 random number between 1 and 6 for the dice */
+        const dice1Roll = Math.floor(Math.random() * 6) + 1;
+        const dice2Roll = Math.floor(Math.random() * 6) + 1;
+        /* End generating a random number between 1 and 6. */
+
+        /* Displaying the dice rolls. */
+        /* Changing the image of the dice to the number that was rolled. */
+        dice1.style.display = 'block';
+        dice2.style.display = 'block';
+        dice1.src = `images/dice${dice1Roll}.png`;
+        dice2.src = `/images/dice${dice2Roll}.png`;
+        /* End displaying the dice rolls. */
+        
+        /* The above code is checking to see if the player rolled a 1 or a 6. If they rolled a 1, they
+        lose their turn. If they rolled a 6, they double their score. */
+        if (dice1Roll === 1 && dice2Roll === 1) { 
+            messageEl.textContent = "You rolled 1! You lose your turn!";
+            switchTurn();
+        } else if (dice1Roll === 6 && dice2Roll === 6) {
+            messageEl.textContent = `You rolled a ${dice1Roll} and a ${dice2Roll}. You double up your score!`;
+            updateScore(dice1Roll,dice2Roll);
             
+        } else {
+            messageEl.textContent = "You rolled " + (dice1Roll + dice2Roll) + "!";
         }
 
-        // Change the message to "Player X has won!"
-        // Hide the Roll Dice Button and show the Reset Button.
-        if (player1Score >= 20 ) {
+        updateScore(dice1Roll,dice2Roll);
+        switchTurn();
+    });
+
+    /**
+     * If it's player 1's turn, add the dice rolls to player 1's score and update the scoreboard. If
+     * it's player 2's turn, add the dice rolls to player 2's score and update the scoreboard
+     * @param dice1Roll - The value of the first dice roll.
+     * @param dice2Roll - The value of the second dice roll.
+     */
+    const updateScore = (dice1Roll,dice2Roll) => { 
+
+        if (player1Turn) {
+            player1Score += dice1Roll + dice2Roll;
+            console.log("Player 1: " + player1Score);
+            player1Scoreboard.textContent = player1Score;
+        } else {
+            player2Score += dice1Roll + dice2Roll;
+            console.log("Player 2: " + player2Score);
+            player2Scoreboard.textContent = player2Score;
+        }
+        checkWinner();
+    };
+
+    /**
+     * If it's player 1's turn, remove the active class from player 1 and add it to player 2. If it's
+     * player 2's turn, remove the active class from player 2 and add it to player 1
+     */
+    const switchTurn = () => {
+
+        if (player1Turn) {
+            player1.classList.remove('active');
+            player2.classList.add('active');
+            player1Turn = false;
+        } else {
+            player2.classList.remove('active');
+            player1.classList.add('active');
+            player1Turn = true;
+        }
+        /* Switching the turn back to the other player. */
+        /* player1Turn = !player1Turn; */
+    };
+
+    /**
+     * If player 1's score is greater than or equal to 100, display a message saying that player 1 wins
+     * and show the display button. If player 2's score is greater than or equal to 100, display a
+     * message saying that player 2 wins and show the display button
+     */
+    const checkWinner = () => { 
+
+        if (player1Score >= 100) {
             messageEl.textContent = "Player 1 wins! 🥳";
+            containerEL.style.backgroundImage = `url('${winerState}')`;
             showDisplayButton();
-            containerEl.style.backgroundImage = `url('${winner}')`;
-        } else  if (player2Score >= 20 ) { 
+        } else if (player2Score >= 100) {
             messageEl.textContent = "Player 2 wins! 🎉";
-            containerEl.style.backgroundImage = `url('${winner}')`;
+            containerEL.style.backgroundImage = `url('${winerState}')`;
             showDisplayButton();
-        } 
-        // Switch the turn back to the other player
-        player1Turn = !player1Turn;
-        
-    })
-/* end click event Roll Dice Button*/
+        }
+    };
 
-// Hook a click event listener up with the Reset Button
-// Invoke the reset() function when the Reset Button is clicked
-resetBtn.addEventListener("click", ()=> { 
-    reset();
-});
+    /* Listening for a click event on the reset button, and when it is clicked, it calls the resetGame
+    function. */
+    resetBtn.addEventListener('click', () => { 
+        resetGame();
+    });
 
-// reset() function that resets the game
-function reset() {
-    player1Score = 0
-    player2Score = 0
-    player1Turn = true
-    player1Scoreboard.textContent = 0
-    player2Scoreboard.textContent = 0
-    player1DiceImage.setAttribute("src","/images/default-dice.png");
-    player2DiceImage.setAttribute("src", "/images/default-dice.png");   
-    messageEl.textContent = "Player 1 Turn"
-    resetBtn.style.display = "none"
-    rollBtn.style.display = "block"
-    player2Dice.classList.remove("active")
-    player1Dice.classList.add("active")
-    containerEl.style.background  = `${initialState}` 
-}
+
+    /**
+     * The resetGame function resets the game by setting the player scores to 0, updating the
+     * scoreboards, hiding the dice, and displaying the roll button and hiding the reset button
+     */
+    const resetGame = () => { 
+        player1Score = 0;
+        player2Score = 0;
+        player1Scoreboard.textContent = player1Score;
+        player2Scoreboard.textContent = player2Score;
+        dice1.style.display = 'none';
+        dice2.style.display = 'none';
+        messageEl.textContent = "";
+        rollBtn.style.display = "block"
+        resetBtn.style.display = "none"
+        containerEL.style.backgroundImage = `${initialState}`;
+    };
+
+/* end game logic */
+
+
