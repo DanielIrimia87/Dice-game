@@ -4,9 +4,9 @@
 - I change the layout of the game
 - I added some functionality to the game that allows interacting with the game State like rolling the dice,  the update scores, switching the turn player , checking who won the game and resetting the game.
 
-/**************/
+
 ## GAME RULES ##
-/**************/
+
 
 
 
