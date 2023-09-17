@@ -12,16 +12,16 @@ const log = args => console.log(args);
     /* Stored  background State of the container */
         const backgroundState = {
             initialState: "linear-gradient(180deg, var(--color-5) 10%, var(--color-3) 50%, var(--color-1) 90%)",  
-            winerState: "/images/winner-dice.gif" 
+            winnerState: "/images/winner-dice.gif" 
         };
     /* Destructuring the backgroundState object. */
-        const {initialState, winerState} = backgroundState;
+        const {initialState, winnerState} = backgroundState;
     /* End Stored background State of the container */
 
     let player1Score = 0;
     let player2Score = 0;
     let player1Turn = true;
-    let pprevDiceRoll = 0;
+    let prevDiceRoll = 0;
 /* end game state*/
 
 /* Store references to the DOM notes */
@@ -60,7 +60,7 @@ const log = args => console.log(args);
         dice1.style.display = 'block';
         dice2.style.display = 'block';
         dice1.src = `images/dice${dice1Roll}.png`;
-        dice2.src = `/images/dice${dice2Roll}.png`;
+        dice2.src = `images/dice${dice2Roll}.png`;
         /* End displaying the dice rolls. */
         
         /* The above code is checking to see if the player rolled a 1 or a 6. If they rolled a 1, they
@@ -90,15 +90,14 @@ const log = args => console.log(args);
         if (player1Turn) {
             player1Score += dice1Roll + dice2Roll;
             player1Scoreboard.textContent = player1Score;
+            messageEl
             player1.classList.remove('active');
             player2.classList.add('active');
-            console.log(`Player 1: ${player1Score}`)
         } else {
             player2Score += dice1Roll + dice2Roll;
             player2Scoreboard.textContent = player2Score;
             player2.classList.remove('active');
             player1.classList.add('active');
-            console.log(`Player 2: ${player2Score}`)
         }
         checkWinner();
     };
@@ -122,11 +121,11 @@ const log = args => console.log(args);
 
         if (player1Score >= 100) {
             messageEl.textContent = "Player 1 wins! 🥳";
-            containerEL.style.backgroundImage = `url('${winerState}')`;
+            containerEL.style.backgroundImage = `url('${winnerState}')`;
             showDisplayButton();
         } else if (player2Score >= 100) {
             messageEl.textContent = "Player 2 wins! 🎉";
-            containerEL.style.backgroundImage = `url('${winerState}')`;
+            containerEL.style.backgroundImage = `url('${winnerState}')`;
             showDisplayButton();
         }
     };
